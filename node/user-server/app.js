@@ -22,7 +22,7 @@ app.get('/users', async(req,res)=>{
 app.get('/users/:user_id', async(req,res)=>{
     let data = req.params.user_id;
     let list = await mysql.query('userInfo', data);
-    res.send(list[0]);
+    res.send(list[0]); //mysql에서 select는 무조건 배열로 넘오 오기 때문에 단건 조회일 경우 list[0]로 해줘야됨
 })
 
 app.post('/users', async(req,res)=>{
