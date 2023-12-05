@@ -1,7 +1,7 @@
 <template>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 		<div class="container-fluid">
-			<router-link class="navbar-brand" aria-current="page" to="/">User-project</router-link>
+			<router-link class="navbar-brand" aria-current="page" to="/">회원 관리</router-link>
 			<button
 				class="navbar-toggler"
 				type="button"

@@ -1,0 +1,78 @@
+<template>
+  <table>
+    <tr>
+        {{ $dateFormat('2023/12/05', 'yyyy-MM-dd') }}
+    </tr>
+    <tr>
+        <th>제목</th>
+        <td>{{ title }}</td>
+        <th>조회수</th>
+        <td>{{ readInfo }}</td>
+    </tr>
+    <tr>
+        <th>작성자</th>
+        <td>{{writer}}</td>
+        <th>작성일</th>
+        <td>{{ regdate }}</td>
+    </tr>
+    <tr>
+        <th>내용</th>
+        <td>{{ content }}</td>
+    </tr>
+    <tr>
+        <button @click="updateInfo">업데이트</button>
+    </tr>
+  </table>
+</template>
+
+<script>
+//import AppMixin from '../mixin.js'
+
+export default {
+    //props : ['title', 'count', 'writer', 'regdate', 'content']
+   // mixins : [AppMixin],    //배열이기 때문에 여러개의 mixin 을 import해서 사용 가능
+    props : {
+        title : String,     //타입만 체크
+        count : {           //다른것도 체크
+            type : Number,
+            default : 0
+        },
+        writer : {
+            type : [String, Object],
+            default :function(){             //default 의 경우 배열이나 객체를 return할때 함수 형태
+                return {first : 'Adward', second : 'Ian'}
+            }
+        },
+        regdate : {
+            required : true,
+            validator : function(value){
+                //yyyy-MM-dd
+                let format = /[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
+                return !(value.match(format)==null);
+            }
+        },
+        content : String
+    },
+    computed : {
+        readInfo(){
+            return this.count+1;
+        }
+    },
+    methods : {
+        updateInfo(){
+            //이벤트 전달 
+            this.$emit('update-info', this.readInfo);
+        }
+    },
+    watch : {
+        readInfo(){
+            //데이터 전달
+            this.$emit('update-info',this.readInfo)
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>
