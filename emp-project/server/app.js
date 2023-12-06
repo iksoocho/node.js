@@ -24,6 +24,12 @@ app.get('/emps/:emp_no', async(req,res)=>{
     res.send(list[0]); //mysql에서 select는 무조건 배열로 넘오 오기 때문에 단건 조회일 경우 list[0]로 해줘야됨
 })
 
+//부서 조회
+app.get('/dept', async (req, resp) => {
+	let result = await mysql.query('deptList');
+	resp.send(result);
+});
+
 const empTable = ['emp_no','first_name', 'last_name', 'gender','hire_date'];
 const deptEmpTable = ['emp_no', 'dept_no','from_date','to_date'];
 const salareisTable = ['emp_no', 'salary','from_date','to_date'];

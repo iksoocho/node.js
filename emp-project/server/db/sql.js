@@ -34,7 +34,7 @@ module.exports = {
                 where h.to_date = CAST('9999-01-01' as date)
                 and s.to_date = CAST('9999-01-01' as date)
                 and e.emp_no = ?`,
-    deptLsit : `select dept_no,
+    deptList : `select dept_no,
                        dept_name
                 from departments
                 order by dept_no`,
