@@ -5,7 +5,7 @@
 </div>
 </template>
 <script>
-  import Header from './layouts/Header.vue'
+  import Header from './layouts/Header-2.vue'
 
   export default{
   components : {

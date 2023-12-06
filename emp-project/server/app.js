@@ -12,13 +12,13 @@ app.listen(3000, ()=>{
 });
 
 //전체조회
-app.get('/api/emps', async(req,res)=>{
+app.get('/emps', async(req,res)=>{
     let list = await mysql.query('empList');
     res.send(list);
 })
 
 //단건조회
-app.get('/api/emps/:emp_no', async(req,res)=>{
+app.get('/emps/:emp_no', async(req,res)=>{
     let data = req.params.emp_no;
     let list = await mysql.query('empInfo', data);
     res.send(list[0]); //mysql에서 select는 무조건 배열로 넘오 오기 때문에 단건 조회일 경우 list[0]로 해줘야됨
@@ -28,7 +28,7 @@ const empTable = ['emp_no','first_name', 'last_name', 'gender','hire_date'];
 const deptEmpTable = ['emp_no', 'dept_no','from_date','to_date'];
 const salareisTable = ['emp_no', 'salary','from_date','to_date'];
 
-app.post('/api/emps', async(req,res)=>{
+app.post('/emps', async(req,res)=>{
     let data = req.body.param;
 
     let empData = {};
@@ -68,14 +68,14 @@ app.post('/api/emps', async(req,res)=>{
     // res.send([result,result2,result3]);
 })
 
-app.put('/api/emps/:emp_no', async(req,res)=>{
+app.put('/emps/:emp_no', async(req,res)=>{
     let datas = [req.body.param, req.params.emp_no];
     let result =  await mysql.query('empUpdate', datas)
     res.send(result);
 })
 
-app.delete('/api/emps/:emp_no', async(req,res)=>{
-    let datas = [req.body.param.to_date, req.params.emp_no];
+app.delete('/emps/:emp_no', async(req,res)=>{
+    let datas = [req.body.param, req.params.emp_no];
     let result = await mysql.query('empDelete', datas);
     res.send(result);
 })
