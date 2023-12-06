@@ -1,6 +1,6 @@
 npm init
 npm install express
 npm install mysql 
-npm iastall dotenv
+npm install dotenv
 npm install --save-dev nodemon -> package.json 에 script에 "dev": "nodemon app.js" 추가
 npm run dev
