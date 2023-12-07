@@ -1,15 +1,25 @@
 <template>
  <div>
-  <Header />
+  <header>
+    <Header />
+
+  </header>
   <router-view/>
+  <footer>
+    <Footer />
+
+  </footer>
 </div>
+
 </template>
 <script>
   import Header from './layouts/Header-2.vue'
+  import Footer from './layouts/Footer.vue'
 
   export default{
   components : {
-    Header
+    Header,
+    Footer
   }
 }
 </script>

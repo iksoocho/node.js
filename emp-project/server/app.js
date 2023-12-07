@@ -81,7 +81,7 @@ app.put('/emps/:emp_no', async(req,res)=>{
 })
 
 app.delete('/emps/:emp_no', async(req,res)=>{
-    let datas = [req.body.param, req.params.emp_no];
+    let datas = [req.body.param.to_date, req.params.emp_no];
     let result = await mysql.query('empDelete', datas);
     res.send(result);
 })

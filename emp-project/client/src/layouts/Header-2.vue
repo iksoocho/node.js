@@ -16,7 +16,7 @@
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<router-link class="nav-link active" aria-current="page" to="/">전체 조회</router-link>
+						<router-link class="nav-link active" aria-current="page" to="/empList">전체 조회</router-link>
 					</li>
 					<li class="nav-item">
 						<router-link class="nav-link active" aria-current="page" to="/empInsert">사원 등록</router-link>

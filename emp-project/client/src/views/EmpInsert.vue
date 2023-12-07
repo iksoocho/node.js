@@ -62,15 +62,15 @@ export default{
   data(){
     return{
       empInfo : {
-        emp_no : 0,
+        emp_no : '',
         first_name:'',
         last_name:'',
         gender:'',
         hire_date:'',
         dept_no:'',
         from_date:'',
-        to_date:'',
-        salary:0
+        to_date:'9999-01-01',
+        salary:''
       },
       depts:{}
     }
@@ -86,7 +86,7 @@ export default{
             let data = {
                 param : this.empInfo                    //"param" : 형태로 보내야됨
             };
-            console.log(data);
+            
             let result = await axios(`/api/emps`,  {              //axios.post(경로,  data)도 가능하지만 초보일땐 왼쪽처럼 하자
                 method : 'post',
                 headers : {
@@ -96,12 +96,13 @@ export default{
             })
             .catch(err=>console.log(err))    
 
-                
-            if(result.data.insertId == 0){
-                alert(`등록 되지 않았습니다. \n메세지를 확인 해 주세요.\n${result.data.message}`)
-            }else{
-                alert(`정상적으로 등록 되었습니다.\n No.${result.data.insertId}`)
+            console.log(result.data);    
+            if(result.data.message == ''){
+                alert(`정상적으로 등록 되었습니다.`)
                 this.$router.push({ name : 'empList'});
+            }else{
+                alert(`등록 실패.`)
+                
 
             }
 

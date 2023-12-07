@@ -24,7 +24,7 @@
            </tr>
            <tr>
                 <th class="text-right table-primary">부서번호</th>
-                <td class="text-center">{{ empInfo.dept_no }} 세</td>
+                <td class="text-center">{{ empInfo.dept_no }} </td>
            </tr>
            <tr>
                 <th class="text-right table-primary">부서이름</th>
@@ -33,8 +33,8 @@
         </table>
     </div>
     <div class="row">
-        <button class="btn btn-info" v-on:click="goToEmpUpdate(empInfo.epm_no)">수정</button>
-        <router-link  to="/" class="btn btn-success">목록</router-link>    <!--router-link의 기본 태그는 a , 바꾸고 싶다면 tag 속성을 사용해서 변경가능  router-link는 단순 페이지 변경-->
+        <button class="btn btn-info" v-on:click="goToEmpUpdate(empInfo.emp_no)">수정</button>
+        <router-link  to="/empList" class="btn btn-success">목록</router-link>    <!--router-link의 기본 태그는 a , 바꾸고 싶다면 tag 속성을 사용해서 변경가능  router-link는 단순 페이지 변경-->
         <button v-on:click="deleteInfo(empInfo.emp_no)" class="btn btn-warning">삭제</button>
     </div>
   </div>
@@ -47,7 +47,7 @@
   export default{
     data(){
       return{
-        searchNo:'',
+        searchNo:'',    //empInfo안에 있는 정보라도 나누는게 낫다 > 다른 곳에선 없는 값일수도 있다
         empInfo:{},
         fireDay:''
       }
@@ -99,11 +99,15 @@
         return year + '년 ' + month + '월 ' + day+'일';
       },
       async deleteInfo(empNo){
-        
-        let result = await axios.delete(`/api/emps/${empNo}`, { data: { param: this.fireDay  } })
+        let data={
+          param : {
+            to_date : this.fireDay
+          }
+        }
+        let result = await axios.delete(`/api/emps/${empNo}`, { data: data })
             .catch(err=>console.log(err))
             console.log(result)
-        if(result.data.changedRows == 0){
+        if(result.data.affectedRows == 0){
                 alert(`삭제 실패. `)
             }else{
                 alert(`정상적으로 삭제 되었습니다.`)
