@@ -1,16 +1,19 @@
 <template>
   <div>
     <Header />
+    <Nav></Nav>
     <router-view/>
   </div>
 </template>
 
 <script>
   import Header from './layouts/Header.vue'
+  import Nav from './layouts/NavBar.vue'
 
   export default{
     components : {
-      Header
+      Header,
+      Nav
     }
   }
 </script>

@@ -1,18 +1,20 @@
 <template>
-<VueComponent />
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div>
+
+    <VueComponent />
+     <Nav />
+     <router-view/>
+  </div>
 </template>
 
 <script>
   import VueComponent from './components/VueComponent.vue'
+  import Nav from  './layouts/NavBar.vue'
 
   export default{
     components : {
-      VueComponent
+      VueComponent,
+      Nav
     }
   }
 </script>
