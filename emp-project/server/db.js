@@ -1,6 +1,8 @@
 const mysql = require('mysql');
 const sql = require('./db/sql.js');
 
+console.log(sql.empSQL.empList);
+
 const pool = mysql.createPool({
     host : process.env.MYSQL_HOST,
     port : process.env.MYSQL_PORT,
@@ -12,7 +14,7 @@ const pool = mysql.createPool({
 
 const query = async(alias, values)=>{
     return new Promise((resolve, reject)=>{
-        pool.query(sql[alias], values, (err,results)=>{     //sql[alias] > 넘길 쿼리문, values > 쿼리문과 함께 넘길 데이터
+        pool.query(sql.empSQL[alias], values, (err,results)=>{     //sql[alias] > 넘길 쿼리문, values > 쿼리문과 함께 넘길 데이터
             if(err){
                 console.log(err);
                 reject({err});
