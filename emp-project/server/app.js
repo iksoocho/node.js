@@ -16,6 +16,25 @@ app.get('/emps', async(req,res)=>{
     let list = await mysql.query('empList');
     res.send(list);
 })
+// app.get('/emps', async (req, res) => {
+//     const page = parseInt(req.query.page) || 1; // 클라이언트에서 페이지 번호를 받음
+//     const limit = parseInt(req.query.limit) || 10; // 페이지당 아이템 수, 기본값은 10
+  
+//     try {
+//       const offset = (page - 1) * limit;
+//       const query2 = `SELECT * FROM employees LIMIT ${limit} OFFSET ${offset}`;
+      
+//       mysql.query(query2, (err, result) => {
+//         if (err) {
+//           res.status(500).json({ message: err.message });
+//         } else {
+//           res.json(result);
+//         }
+//       });
+//     } catch (err) {
+//       res.status(500).json({ message: err.message });
+//     }
+// });
 
 //단건조회
 app.get('/emps/:emp_no', async(req,res)=>{

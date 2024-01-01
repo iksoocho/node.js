@@ -15,7 +15,7 @@
             </thead>
 
             <tbody>
-                <tr :key="index" v-for="(emp, index) in empList" v-on:click="goToEmpInfo(emp.emp_no)">
+                <tr v-for="(emp, idx) in empList.slice(pageStartIdx, pageStartIdx + ITEM_PER_PAGE)" :key="idx" v-on:click="goToEmpInfo(emp.emp_no)">
                     <td>{{ emp.emp_no }}</td>
                     <td>{{ emp.first_name + ' ' + emp.last_name }}</td>
                     <td>{{ emp.gender== 'M' ? '남자' : '여자' }}</td>
@@ -25,26 +25,44 @@
                     <td>{{ emp.dept_name }}</td>
                 </tr>
             </tbody>
+            
         </table>
+        <!-- <Pagination :total="empList.length" :perPage="ITEM_PER_PAGE" @pageChange="onChangePage" /> -->
+        <Paginate :list="empList" v-bind="{ ITEM_PER_PAGE, PAGE_PER_SECTION }" @change-page="onChangePage" />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Paginate from '../component/Pagination.vue';
+
 
 export default{
+  components: {
+    Paginate,
+  },
   data(){
     return{
-      empList : []
+      empList : [],
+      ITEM_PER_PAGE: 10,
+      PAGE_PER_SECTION: 5,
+      curPage : 1
     }
   },
+ 
   created(){
     this.getEmpList();
+    this.curPage = 1;
   },
   computed : {
       empGender(){
         return this.empInfo.gender == 'M' ? '남자' : '여자'
-      }
+      },
+      pageStartIdx() {
+      return (this.curPage - 1) * this.ITEM_PER_PAGE;
+    }
+      
+      
   },
   methods : {
     async getEmpList(){
@@ -58,6 +76,11 @@ export default{
       console.log(no)
       this.$router.push({path : '/empInfo', query : {empNo : no} });
    },
+   onChangePage(data) {
+      this.curPage = data;
+    }
+  
+   
   //   dateFormat(value){
   //       //chatGPT가 알려준 방식 
   //       // const options = { year: 'numeric', month: 'long', day: 'numeric' };
