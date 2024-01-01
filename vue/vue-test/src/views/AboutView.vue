@@ -1,5 +1,19 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <!-- <VCalendar /> -->
+  <VDatePicker v-model="date" locale="en" color="red" />
 </template>
+
+<script>
+  export default{
+    data(){
+      return {
+        date : ''
+      }
+    },
+    // methods:{
+    //   selectDate(value){
+    //     this.date = 
+    //   }
+    // }
+  }
+</script>
