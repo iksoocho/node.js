@@ -1,22 +1,24 @@
 <template>
-  <div style="display: flex; align-items: center">
-    <span v-if="leftmostPage > PAGE_PER_SECTION">
-      <a @click="previousPage">&lt;</a>
-    </span>
-    <span class="page" v-for="page in getPaginationArray(leftmostPage)" :key="page">
-      <a :class="{ on: page === curPage }" @click="onChangeCurPage(page)">
-        {{ page }}
+  <nav aria-label="...">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" v-if="leftmostPage > PAGE_PER_SECTION">
+      <a class="page-link" aria-label="Previous" @click="previousPage">
+        <span aria-hidden="true">&laquo;</span>
       </a>
-    </span>
-    <span v-if="leftmostPage + PAGE_PER_SECTION <= totalPage">
-      <a @click="nextPage">&gt;</a>
-    </span>
-  </div>
-  <p>totalArticles : {{ list.length }}</p>
-  <p>totalPage : {{ totalPage }}</p>
-  <p>leftmostPage : {{ leftmostPage }}</p>
-  <p>ITEM_PER_PAGE : {{ ITEM_PER_PAGE }}</p>
-  <p>PAGE_PER_SECTION : {{ PAGE_PER_SECTION }}</p>
+    </li>
+
+    <li class="page-item"  v-for="page in getPaginationArray(leftmostPage)" :key="page">
+      <a class="page-link"  :class="{ active: 'page' == curPage }" @click="onChangeCurPage(page)">{{ page }}</a>
+    </li>
+    
+    <li class="page-item" v-if="leftmostPage + PAGE_PER_SECTION <= totalPage">
+      <a class="page-link"  aria-label="Next" @click="nextPage">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
 </template>
 
 <script>
@@ -25,6 +27,7 @@ export default {
     list: Array,
     ITEM_PER_PAGE: Number,
     PAGE_PER_SECTION: Number,
+    curPage: Number
   },
   methods: {
     getPaginationArray(left) {
@@ -58,16 +61,18 @@ export default {
       return Math.ceil(this.list.length / (this.ITEM_PER_PAGE || 1));
     },
   },
+  
 };
 </script>
 
 <style>
-.page {
-  padding: 1rem;
+.page-item {
+  padding: 5px;
   cursor: pointer;
 }
-.page a.on {
+.page-item a.active {
   font-weight: 900;
   color: red;
 }
-</style>
+
+</style> 

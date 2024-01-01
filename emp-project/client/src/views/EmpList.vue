@@ -28,7 +28,8 @@
             
         </table>
         <!-- <Pagination :total="empList.length" :perPage="ITEM_PER_PAGE" @pageChange="onChangePage" /> -->
-        <Paginate :list="empList" v-bind="{ ITEM_PER_PAGE, PAGE_PER_SECTION }" @change-page="onChangePage" />
+        <!-- <Paginate :list="empList" v-bind="{ ITEM_PER_PAGE, PAGE_PER_SECTION }"  v-model="curPage" @change-page="onChangePage" /> -->
+        <Paginate :list="empList" :ITEM_PER_PAGE="ITEM_PER_PAGE" :PAGE_PER_SECTION="PAGE_PER_SECTION" :curPage="curPage" @change-page="onChangePage" />
   </div>
 </template>
 
@@ -52,7 +53,7 @@ export default{
  
   created(){
     this.getEmpList();
-    this.curPage = 1;
+    // this.curPage = 1;
   },
   computed : {
       empGender(){
