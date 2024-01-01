@@ -45,6 +45,7 @@ export default{
   data(){
     return{
       empList : [],
+      //pagination
       ITEM_PER_PAGE: 10,
       PAGE_PER_SECTION: 5,
       curPage : 1
@@ -59,6 +60,7 @@ export default{
       empGender(){
         return this.empInfo.gender == 'M' ? '남자' : '여자'
       },
+      //pagination
       pageStartIdx() {
       return (this.curPage - 1) * this.ITEM_PER_PAGE;
     }
@@ -77,6 +79,7 @@ export default{
       console.log(no)
       this.$router.push({path : '/empInfo', query : {empNo : no} });
    },
+   //pagination
    onChangePage(data) {
       this.curPage = data;
     }
